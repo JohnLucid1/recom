@@ -7,22 +7,18 @@
 #define KNRM  "\x1B[0m"
 #define KGRN  "\x1B[32m"
 #define KBLU  "\x1B[34m"
-// char* get_flag(buff ){
 
-
-//     return "fdfd";
-// }
 
 char* read_entire_file(const char* filename)
 {
-    FILE* file = fopen(filename, "rb"); // open in binary mode
+    FILE* file = fopen(filename, "rb"); 
     if (file == NULL)
     {
         perror("Error opening file");
         return NULL;
     }
 
-    // Move the file position indicator to the end of the file
+
     if (fseek(file, 0, SEEK_END) != 0)
     {
         perror("Error seeking in file");
@@ -30,7 +26,7 @@ char* read_entire_file(const char* filename)
         return NULL;
     }
 
-    // Get the size of the file
+
     long fileSize = ftell(file);
     if (fileSize == -1)
     {
@@ -39,10 +35,10 @@ char* read_entire_file(const char* filename)
         return NULL;
     }
 
-    // Reset file position to the start of the file
+
     rewind(file);
 
-    // Allocate buffer to store the file contents + 1 for null terminator
+
     char* buffer = (char*)malloc(fileSize + 1);
     if (buffer == NULL)
     {
@@ -51,7 +47,7 @@ char* read_entire_file(const char* filename)
         return NULL;
     }
 
-    // Read the entire file into the buffer
+
     size_t bytesRead = fread(buffer, 1, fileSize, file);
     if (ferror(file))
     {
@@ -61,10 +57,10 @@ char* read_entire_file(const char* filename)
         return NULL;
     }
 
-    // Add a null terminator if you plan to treat it like a string
+
     buffer[bytesRead] = '\0';
 
-    // Close the file
+
     fclose(file);
 
     return buffer;
